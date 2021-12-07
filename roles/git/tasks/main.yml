@@ -1,0 +1,9 @@
+---
+
+### INSTALA GIT ###
+
+- name: GIT> Instalando Git
+  yum:
+    name: git
+    state: present
+    update_cache: yes

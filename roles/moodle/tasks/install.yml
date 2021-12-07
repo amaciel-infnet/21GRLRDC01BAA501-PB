@@ -1,0 +1,45 @@
+---
+### INSTALACAO DO MOODLE ###
+
+#MOODLE ISTALADO?
+- name: MOODLE> Verificando se o Moodle esta Instalado
+  stat:
+    path: "{{ moodle_root_path }}/config.php"
+  register: moodle_installed
+
+#MOODLE INSTALL
+- name: MOODLE> Executando Script de instalacao do Moodle
+  command: |
+    /usr/bin/php install.php
+    --wwwroot='{{ moodle_wwwroot }}'
+    --dataroot='{{ moodle_dataroot_path }}'
+    --dbtype='{{ moodle_db_type }}'
+    --dbhost='{{ moodle_db_host }}'
+    --dbname='{{ moodle_db_name }}'
+    --dbuser='{{ moodle_db_username }}'
+    --dbpass='{{ moodle_db_password }}'
+    --fullname='{{ moodle_fullname }}'
+    --shortname='{{ moodle_shortname }}'
+    --summary='{{ moodle_summary }}'
+    --adminuser='{{ moodle_adminuser }}'
+    --adminpass='{{ moodle_adminpass }}'
+    --adminemail='{{ moodle_adminemail }}'
+    --lang='{{ moodle_lang }}'
+    --non-interactive
+    --agree-license
+    --allow-unstable
+  args:
+    creates: "{{ moodle_root_path }}/config.php" 
+    chdir: "{{ moodle_root_path }}/admin/cli"
+  register: moodle_instalando
+  when: not moodle_installed.stat.exists
+
+#Config.php> Acerta as permissoes
+- name: MOODLE> Alterando Proprietarios config.php
+  file:
+    path: "{{ moodle_root_path }}/config.php"
+    owner: "{{ moodle_root_owner }}"
+    group: "{{ moodle_root_group }}"
+    mode: "0644"
+
+#--dbsocket=/var/run/mysqld/mysqld.sock

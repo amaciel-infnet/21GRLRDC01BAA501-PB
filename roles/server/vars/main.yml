@@ -1,0 +1,15 @@
+---
+# vars file for server
+
+# URL do site
+server_name: "moodle.amaciel.tk"
+# Diretorio
+http_host: "html"
+# Arquivo de Configuracao do Moodle no Apache
+http_conf: "moodle.conf"
+contato: "alexandre.maciel@al.infnet.edu.br" 
+http_port: "80"
+#Define se o site default do Apache sera desabilitado
+disable_default: true
+# Senha de Root do Mysql
+mysql_root_password: "UmBo4Senha"

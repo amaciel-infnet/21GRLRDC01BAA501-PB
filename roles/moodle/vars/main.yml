@@ -1,0 +1,41 @@
+---
+#MOODLE-DB
+#rds-mysql-pb-1
+moodle_db_host:           rds-mysql-pb-1.cy0xbcx8qa4g.us-east-1.rds.amazonaws.com
+moodle_db_type:           mysqli
+moodle_db_prefix:         mdl_
+moodle_db_name:           moodle
+moodle_db_username:       moodleuser
+moodle_db_password:       'QualP0d3Rc2'
+
+#MOODLE-FOLDER-ROOT
+moodle_root_path:         /var/www/html
+moodle_root_owner:        'ec2-user'
+moodle_root_group:        'apache'
+moodle_root_permissions:  '0755'
+
+#MOODLE-FOLDER-DATA
+moodle_dataroot_path:     /var/moodledata
+moodle_dataroot_user:     'ec2-user'
+moodle_dataroot_group:    'apache'
+moodle_dataroot_permissions: '0777'
+
+#MOODLE-CONFIG
+moodle_lang:              pt_br
+moodle_wwwroot:           http://moodle.amaciel.tk
+moodle_adminuser:         admin
+moodle_adminpass:         'M3sm0ParadO'
+moodle_adminemail:        "alexandre.maciel@al.infnet.edu.br"
+moodle_fullname:          "Moodle de Alexandre Maciel"
+moodle_shortname:         "MoodleAM"
+moodle_summary:           "INFNET PB501 Alexandre Maciel"
+
+#MOODLE-GIT-REPO Ultima Versao
+moodle_git_repository:    git://git.moodle.org/moodle.git
+
+#MYSQL-ROOT
+mysql_root_name:          "admin"
+mysql_root_password:      "UmBo4Senha"
+
+#rds-mysql-pb
+#moodle_db_host:           rds-mysql-pb.cy0xbcx8qa4g.us-east-1.rds.amazonaws.com

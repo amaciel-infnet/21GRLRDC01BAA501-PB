@@ -1,0 +1,15 @@
+---
+
+#Adiciona repositorio do Mariadb 10.03 do Centos
+- name: MariaDB-10.3> Adiciona Repositorio
+  yum_repository:
+    name: MariaDB-10.3
+    description: mariadb
+    baseurl: http://yum.mariadb.org/10.3/centos7-amd64
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    gpgcheck: yes
+
+#Instala dependencias Php, Mysql e o Epel
+- name: Instalando pacotes PHP adicionais
+  yum: name={{ item }} update_cache=yes state=latest
+  loop: [ 'MariaDB-client', 'php-common', 'graphviz', 'aspell', 'clamav', 'php-pspell', 'php-curl', 'php-gd', 'php-intl', 'php-mysqlnd', 'php-xml', 'php-xmlrpc', 'php-ldap', 'php-zip', 'php-soap', 'php-mbstring' ]

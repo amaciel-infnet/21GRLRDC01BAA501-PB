@@ -1,0 +1,29 @@
+---
+
+#Habilitando o repositorio Epel e php7.4 da Amazon
+- name: Habilitando Repositorios php74 e epel
+  shell: amazon-linux-extras enable php7.4 epel
+
+#Httpd Configuration
+- name: HTTPD> Instalando HTTPD, PHP e Mysql
+  yum: name={{ item }} update_cache=yes state=latest
+  loop: [ '*', 'epel-release', 'httpd', 'mysql', 'php', 'python-pip' ]
+
+#PIP Configuration
+- name: PIP> Instalando Pymysql
+  pip: name={{ item }} state=latest
+  loop: [ 'PyMySQL' ]
+
+#Cria a pasta de arquivos do Site
+- name: HTTPD> Criando a pasta do Site
+  file:
+    path: "/var/www/{{ http_host }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '0755'
+
+#HTTPD Habilita o servico
+- name: HTTPD> Habilita o servico
+  service: name=httpd enabled=yes
+  notify: Restart HTTPD

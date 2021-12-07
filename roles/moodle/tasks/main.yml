@@ -1,0 +1,6 @@
+---
+### IMPORTA AS SUB-TASKS
+
+- import_tasks: config.yml
+- import_tasks: base.yml
+- import_tasks: install.yml

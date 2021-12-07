@@ -1,0 +1,26 @@
+---
+
+### MYSQL MOODLE BASE ###
+
+#Cria a Base
+- name: MYSQL> Criando a Base de Dados do Moodle
+  mysql_db:
+    name: "{{ moodle_db_name }}"
+    login_host: "{{ moodle_db_host }}"
+    login_user: "{{ mysql_root_name }}"
+    login_password: "{{ mysql_root_password }}"
+    state: present
+
+#Cria o usuario do banco
+# Problemas com GRANT ALL no RDS MariaDB por isso usei RDS Mysql
+# https://aws.amazon.com/pt/premiumsupport/knowledge-center/duplicate-master-user-mysql/
+- name: MYSQL> Criando o Usuario do Moodle para Gerir a Base
+  mysql_user:
+    name: "{{ moodle_db_username }}"
+    password: "{{ moodle_db_password }}"
+    host: "%"
+    priv: "{{ moodle_db_name }}.*:ALL"
+    login_host: "{{ moodle_db_host }}"
+    login_user: "{{ mysql_root_name }}"
+    login_password: "{{ mysql_root_password }}"
+    state: present
